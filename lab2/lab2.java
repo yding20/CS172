@@ -1,23 +1,7 @@
 // references: https://docs.oracle.com/javase/tutorial/extra/generics/methods.html
 
 import java.util.*;
-
-@FunctionalInterface
-interface FirstInterface<T> {
- //the abstract method  
- public void singleMethod(T param);
-}
-
-interface SecondInterface {
-  //Single abstract method
-  public long computeSum(int num1, int num2);
-}
-
-interface ThirdInterface {
-  //Single abstract method
-  public Character computeOne(Character[] arr);
-}
-
+import java.util.function.Function;
 
 public class lab2{
 
@@ -101,20 +85,16 @@ public class lab2{
 		System.out.println("max String is: " + getMax(strArray));
 
 
-		FirstInterface<String> instance = (String param) -> {System.out.println("My lambda says "+ param);};
-		instance.singleMethod("apple");
+		Function<Character[], Character> findMax = (Character[] anArray) -> {
+			Character max = anArray[0];
+			for (int i = 0; i < anArray.length; i++) {
+				if (anArray[i].compareTo(max) > 0)	max = anArray[i];
+			}
+			return max;			
+		};
 
-		FirstInterface<Double> instance2 = (Double param) -> {System.out.println("My lambda says "+ param);};
-		instance2.singleMethod(1.2);
-
-		SecondInterface instance3 = (int x, int y) -> {return x + y;};
-		System.out.println(instance3.computeSum(1, 2));
-
-		Arrays.sort(charArray, Collections.reverseOrder());
-		ThirdInterface instance4 = (Character[] arr) -> {return arr[0];};
-		System.out.println(instance4.computeOne(charArray));
-
-
+		System.out.println("Functional  Interface findMax : ");
+		System.out.println(findMax.apply(charArray));
 	}
 } 
 
