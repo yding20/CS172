@@ -1,0 +1,3 @@
+author : yanhao ding
+compile: javac lab2.java
+run :   java lab2

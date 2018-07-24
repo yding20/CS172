@@ -1,4 +1,7 @@
 // references: https://docs.oracle.com/javase/tutorial/extra/generics/methods.html
+// Author : yanhao ding
+// Partner : Xin Bian
+
 
 import java.util.*;
 import java.util.function.Function;
@@ -60,7 +63,7 @@ public class lab2{
 //	}
 
 // 5. generic getMax()
-	public static<T extends Comparable<T>> T getMax(T[] anArray) {
+	public static<T extends Comparable<T>> Comparable<T> getMax(T[] anArray) {
 		T max = anArray[0];
 		for (int i = 0; i < anArray.length; i++) {
 			if (anArray[i].compareTo(max) > 0)	max = anArray[i];

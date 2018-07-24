@@ -1,3 +1,6 @@
+// Author : yanhao ding
+// Partner : Xin Bian
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -124,10 +127,10 @@ public class lab3 {
 		print2DList(arrL);
 
 		System.out.println("PrintSum2Darray");
-		runningSum2DArray(arr, 4);
+		runningSum2DArray(arr, Integer.parseInt(args[0]));
 
 		System.out.println("PrintSum2DList");
-		runningSum2DArrayList(arrL, 4);
+		runningSum2DArrayList(arrL, Integer.parseInt(args[0]));
 
 	}
 }
