@@ -1,12 +1,12 @@
-public class Rooks {
+public class BinaryCounter {
 	private int N;
  	private int[] a; // bits (0 or 1)
 
- 	public Rooks(int N) {
+ 	public BinaryCounter(int N) {
  		this.N = N;
  		a = new int[N];
- 		for (int i = 0; i < N; i++)
- 			a[i] = i;
+// 		for (int i = 0; i < N; i++)
+// 			a[i] = i;
  			enumerate(0);
  	}
 
@@ -25,22 +25,14 @@ public class Rooks {
  			process(); 
  			return; 
  		}
- 		for (int i = k; i < N; i++) {
- 			exch(k, i);
-			enumerate(k+1);
-			exch(i, k);    // clean up
-		}
-		
+ 		enumerate(k+1);
+ 		a[k] = 1;
+ 		enumerate(k+1);
+ 		a[k] = 0;
 	}
-
- 	private void exch(int i, int j) { 
- 		int t = a[i];
- 		a[i] = a[j];
- 		a[j] = t; 
- 	}
 
 	public static void main(String[] args) {
  		int N = Integer.parseInt(args[0]);
- 		Rooks test = new Rooks(N);
+ 		BinaryCounter test = new BinaryCounter(N);
  	}
 }

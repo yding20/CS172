@@ -1,0 +1,2 @@
+1. The first problem use method from link https://www.geeksforgeeks.org/level-order-tree-traversal/
+2. Second problem different from the version from // https://www.geeksforgeeks.org/construct-tree-from-given-inorder-and-preorder-traversal/ The solution is more space efficent since they use the pointer for array like BST.java and quick sort partition function. However, I copy the subarray every time, slow way.
