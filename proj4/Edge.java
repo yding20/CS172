@@ -17,14 +17,12 @@ public class Edge implements Comparable<Edge> {
 		this.wy = wy;
 	}
 
-    public int either() {
+    public int from() {
         return i;
     }
 
-    public int other(int vertex) {
-        if      (vertex == i) return j;
-        else if (vertex == j) return i;
-        else throw new IllegalArgumentException("Illegal endpoint");
+    public int to() {
+		return j;
     }
 
 	public double weight() {
