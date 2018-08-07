@@ -35,11 +35,11 @@ public class Graph extends JPanel {
         }
     }
 
-    public Graph() {
+    public Graph(String inputfile) {
         setPreferredSize(new Dimension(900, 700));
         hmnode = new HashMap<String, Node>();
         try {
-            File file = new File("p4dataset/ur.txt");
+            File file = new File(inputfile);
 
             Scanner sc0 = new Scanner(file);
             while (sc0.hasNextLine()) {
@@ -133,9 +133,10 @@ public class Graph extends JPanel {
     }
 
     public double[] gethmnode(String key) {
-        double[] locationarr = new double[2];
+        double[] locationarr = new double[3];
         locationarr[0] = hmnode.get(key).x;
         locationarr[1] = hmnode.get(key).y;
+        locationarr[2] = hmnode.get(key).nodeNum;
         return locationarr;
     }
 
@@ -186,7 +187,7 @@ public class Graph extends JPanel {
 
 
 	public static void main(String args[]) {
-        Graph G = new Graph();
+        Graph G = new Graph("p4dataset/ur.txt");
         G.getS();
 //        G.setVisible(true);
 

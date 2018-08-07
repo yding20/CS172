@@ -16,10 +16,18 @@ public class Dijkstra extends JPanel {
 	private static final int DELAY = 100;
 	private boolean control;
 	private Stack<Edge> path;
+	private int s;
+	private int t;
+	private String start;
+	private String dest;
 
-	public Dijkstra(Graph G, int s) {
+	public Dijkstra(Graph G, String start, String dest) {
         //setPreferredSize(new Dimension(900, 700));
 		this.G = G;
+		this.start = start;
+		this.dest = dest;
+		s = (int) G.gethmnode(start)[2];
+		t = (int) G.gethmnode(dest)[2];
 
 		distTo = new double[G.V()];
 		edgeTo = new Edge[G.V()];
@@ -76,10 +84,11 @@ public class Dijkstra extends JPanel {
 
 
     public void paintComponent(Graphics g) {
+    	super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         int width =  getWidth();   // Find out the width of this component.
         int height = getHeight(); 
-        System.out.println(width + "**" + height);
+//        System.out.println(width + "**" + height);
         Stack<Edge>[] adj = G.getAdj();
         double vx = 0.0;
         double vy= 0.0;
@@ -107,23 +116,22 @@ public class Dijkstra extends JPanel {
                 g2.draw(lin);
             }
         }
-//        int t = 194129;
-//        int s = 22659;
 
-        int t = 20;
-        int s = 0;
-//        String s1 = "GILBERT-LONG";
-//        double xcor = (G.gethmnode(s1)[0]-Xmin)*ratio + 75;
-//        double ycor = (G.gethmnode(s1)[1]-Ymin)*ratio + 75;
-//        g2.setPaint(Color.RED);
-//        g2.fill (new Ellipse2D.Double(ycor-5, xcor-5, 10, 10));
-//
-//        String s2 = "MELIORA-NORTH";
-//        double xcor2 = (G.gethmnode(s2)[0]-Xmin)*ratio + 75;
-//        double ycor2 = (G.gethmnode(s2)[1]-Ymin)*ratio + 75;
-//        g2.setPaint(Color.RED);
-//        g2.fill (new Ellipse2D.Double(ycor2-5, xcor2-5, 10, 10));
-//
+        double xcor = (G.gethmnode(start)[0]-Xmin)*ratio + width*0.1;
+        double ycor = (G.gethmnode(start)[1]-Ymin)*ratio + height*0.1;
+        g2.setPaint(Color.BLUE);
+        g2.fill (new Ellipse2D.Double(ycor-5, xcor-5, 10, 10));
+
+        double xcor2 = (G.gethmnode(dest)[0]-Xmin)*ratio + width*0.1;
+        double ycor2 = (G.gethmnode(dest)[1]-Ymin)*ratio + height*0.1;
+        g2.setPaint(Color.YELLOW);
+        g2.fill (new Ellipse2D.Double(ycor2-5, xcor2-5, 10, 10));
+        g2.setColor(Color.BLACK);
+       	g2.setStroke(new BasicStroke(1));
+        g2.drawString("Start point in BLUE : " , 10, 40);
+        g2.drawString("End point in YELLOW : " , 10, 60);
+        g2.drawString("Click to find the path : " , 10, 80);
+
 
       	if (control)  {
       		g2.setColor(Color.GREEN);
@@ -166,18 +174,41 @@ public class Dijkstra extends JPanel {
 
 
    	public static void main(String args[]) {
-        Graph G = new Graph();
-//        int s = 22659;
-        int s = 0;
-        Dijkstra content= new Dijkstra(G, s);
-        JFrame window = new JFrame("GPS");
-        window.setContentPane(content);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setLocation(120,70);
-        window.setSize(550, 550);
-        window.setVisible(true);
+        Graph G = new Graph(args[0]);
+        if (args[1].equals("--directions") || (args[1].equals("--show") &&
+        	(args.length == 2)) || (args[1].equals("--show") && (args[2].equals("--directions")))) {
+        	String start = args[args.length-2];
+        	String dest = args[args.length-1];
+	        Dijkstra content= new Dijkstra(G, start, dest);
 
+	        JFrame window = new JFrame("GPS");
+	        window.setContentPane(content);
+	        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        window.setLocation(120,70);
+	        window.setSize(550, 550);
+	        window.setVisible(true);
+        }
 
     }
 
 }
+
+
+
+// java-algs4 Dijkstra p4dataset/nys.txt --show --directions i22659 i194129
+// java-algs4 Dijkstra p4dataset/ur.txt --show --directions HOYT MOREY
+// java-algs4 Dijkstra p4dataset/ur.txt --show --directions GILBERT-LONG MELIORA-NORTH
+
+
+
+
+
+
+//        int t = 194129;
+//        int s = 22659;
+
+//        int t = 20;
+//        int s = 0;
+
+
+
