@@ -5,10 +5,15 @@ import java.util.Scanner;
 import java.io.File;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Line2D;
+import java.awt.geom.*;
+import java.awt.Color;
+import java.awt.BasicStroke;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.Dimension;
 import java.util.Set;
 
-public class Graph {
+public class Graph extends JPanel {
 
     private int V;
     private int E;
@@ -31,9 +36,10 @@ public class Graph {
     }
 
     public Graph() {
+        setPreferredSize(new Dimension(900, 700));
         hmnode = new HashMap<String, Node>();
         try {
-            File file = new File("p4dataset/nys.txt");
+            File file = new File("p4dataset/ur.txt");
 
             Scanner sc0 = new Scanner(file);
             while (sc0.hasNextLine()) {
@@ -126,6 +132,13 @@ public class Graph {
         return adj;
     }
 
+    public double[] gethmnode(String key) {
+        double[] locationarr = new double[2];
+        locationarr[0] = hmnode.get(key).x;
+        locationarr[1] = hmnode.get(key).y;
+        return locationarr;
+    }
+
     public void getS () {
         for (int m = 0; m < 10; m++) {
             for (Edge e: adj[m]) {
@@ -143,6 +156,32 @@ public class Graph {
         System.out.println(Xmax);
         System.out.println(Ymin);
         System.out.println(Ymax);
+    }
+
+    public void paint(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        double vx = 0.0;
+        double vy= 0.0;
+        double wx = 0.0;
+        double wy = 0.0;
+        double xrange = Xmax-Xmin;
+        double yrange = Ymax-Ymin;
+        double range = xrange;
+        if (xrange < yrange)
+            range = yrange;
+        double ratio = (1000/range)/1.8;
+
+        for (int m = 0; m < adj.length; m++) {
+            for (Edge e: adj[m]) {
+                vx = (e.getVX() - Xmin)*ratio + 75;
+                vy = (e.getVY() - Ymin)*ratio + 75;
+                wx = (e.getWX() - Xmin)*ratio + 75;
+                wy = (e.getWY() - Ymin)*ratio + 75;
+
+                Line2D lin = new Line2D.Double(vy, vx, wy, wx);
+                g2.draw(lin);
+            }
+        }
     }
 
 
