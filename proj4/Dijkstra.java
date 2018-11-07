@@ -195,9 +195,9 @@ public class Dijkstra extends JPanel {
 
 
 
-// java-algs4 Dijkstra p4dataset/nys.txt --show --directions i22659 i194129
-// java-algs4 Dijkstra p4dataset/ur.txt --show --directions HOYT MOREY
-// java-algs4 Dijkstra p4dataset/ur.txt --show --directions GILBERT-LONG MELIORA-NORTH
+// java Dijkstra p4dataset/nys.txt --show --directions i22659 i194129
+// java Dijkstra p4dataset/ur.txt --show --directions HOYT MOREY
+// java Dijkstra p4dataset/ur.txt --show --directions GILBERT-LONG MELIORA-NORTH
 
 
 
